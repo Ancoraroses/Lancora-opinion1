@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Àncora · Tu opinión</title>
+<style>
+  :root{
+    --navy:#0b3c5d;
+    --navy-dark:#082a41;
+    --gold:#c89b3c;
+    --gold-light:#e4c477;
+    --sand:#f7f1e3;
+    --sea:#2e7d9a;
+    --white:#ffffff;
+    --star-empty:#d8cdb0;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Poppins',Arial,sans-serif;
+    background:linear-gradient(160deg,var(--sand) 0%,#eee3c8 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .card{
+    background:var(--white);
+    max-width:480px;
+    width:100%;
+    border-radius:28px;
+    box-shadow:0 20px 45px rgba(11,60,93,0.18);
+    padding:40px 32px 32px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:-60px;
+    right:-60px;
+    width:160px;
+    height:160px;
+    background:radial-gradient(circle,var(--gold-light) 0%,transparent 70%);
+    opacity:0.5;
+    border-radius:50%;
+  }
+  .wave{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:38px;
+    background:var(--sea);
+    opacity:0.08;
+    border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .lang-switch{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-bottom:22px;
+    position:relative;
+    z-index:2;
+  }
+  .lang-switch button{
+    border:1.5px solid var(--navy);
+    background:transparent;
+    color:var(--navy);
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    transition:all .2s ease;
+    letter-spacing:.5px;
+  }
+  .lang-switch button.active,
+  .lang-switch button:hover{
+    background:var(--navy);
+    color:var(--white);
+  }
+  .logo{
+    width:110px;
+    height:110px;
+    margin:0 auto 18px;
+    border-radius:50%;
+    border:3px solid var(--gold);
+    object-fit:cover;
+    display:block;
+    background:var(--sand);
+  }
+  h1{
+    font-family:'Cormorant Garamond','Georgia',serif;
+    color:var(--navy-dark);
+    font-size:30px;
+    margin:0 0 6px;
+    letter-spacing:.5px;
+  }
+  p.subtitle{
+    color:#5c6b73;
+    font-size:15px;
+    margin:0 0 28px;
+    line-height:1.5;
+  }
+  .stars{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin:10px 0 30px;
+    position:relative;
+    z-index:2;
+  }
+  .stars svg{
+    width:44px;
+    height:44px;
+    cursor:pointer;
+    fill:var(--star-empty);
+    transition:transform .15s ease, fill .15s ease;
+  }
+  .stars svg:hover,
+  .stars svg.hovered{
+    transform:scale(1.15);
+  }
+  .stars.selected svg.filled{
+    fill:var(--gold);
+  }
+  .footer-note{
+    font-size:12px;
+    color:#9aa5ab;
+    margin-top:8px;
+    position:relative;
+    z-index:2;
+  }
+  .redirect-msg{
+    display:none;
+    font-size:14px;
+    color:var(--sea);
+    font-weight:600;
+    margin-top:6px;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="wave"></div>
+
+  <div class="lang-switch">
+    <button data-lang="es" onclick="setLang('es')">ES</button>
+    <button data-lang="fr" onclick="setLang('fr')">FR</button>
+    <button data-lang="en" onclick="setLang('en')">EN</button>
+  </div>
+
+  <img class="logo" src="https://lh3.googleusercontent.com/d/1Sn6cRZPGXz9UCWmdOR2Ea6JmohuCCZUl" alt="L'Àncora 40 aniversario">
+
+  <h1 id="title">¿Cómo ha sido tu experiencia?</h1>
+  <p class="subtitle" id="subtitle">Tu opinión nos ayuda a mejorar cada día en L'Àncora.</p>
+
+  <div class="stars" id="stars">
+    <svg data-value="1" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-value="2" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-value="3" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-value="4" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+    <svg data-value="5" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+  </div>
+
+  <div class="redirect-msg" id="redirectMsg">Redirigiendo…</div>
+  <p class="footer-note" id="footerNote">L'Àncora Bar Restaurant · Roses</p>
+</div>
+
+<script>
+  // ======= CONFIGURA AQUÍ TUS ENLACES =======
+  const GOOGLE_REVIEW_URL = "https://g.page/r/CbUHHhOQWx2cEBE/review";
+  const COMPLAINT_FORM_URL = "https://forms.gle/nr3uLNdPd2JcMoRJ7";
+  // ===========================================
+
+  const texts = {
+    es: {
+      title: "¿Cómo ha sido tu experiencia?",
+      subtitle: "Tu opinión nos ayuda a mejorar cada día en L'Àncora.",
+      footer: "L'Àncora Bar Restaurant · Roses",
+      redirect: "Gracias, redirigiendo…"
+    },
+    fr: {
+      title: "Comment s'est passée votre expérience ?",
+      subtitle: "Votre avis nous aide à nous améliorer chaque jour à L'Àncora.",
+      footer: "L'Àncora Bar Restaurant · Roses",
+      redirect: "Merci, redirection en cours…"
+    },
+    en: {
+      title: "How was your experience?",
+      subtitle: "Your feedback helps us improve every day at L'Àncora.",
+      footer: "L'Àncora Bar Restaurant · Roses",
+      redirect: "Thank you, redirecting…"
+    }
+  };
+
+  let currentLang = "es";
+
+  function detectLang(){
+    const nav = (navigator.language || navigator.userLanguage || "es").toLowerCase();
+    if(nav.startsWith("fr")) return "fr";
+    if(nav.startsWith("es") || nav.startsWith("ca")) return "es";
+    if(nav.startsWith("en")) return "en";
+    return "es"; // idioma por defecto
+  }
+
+  function setLang(lang){
+    currentLang = lang;
+    document.getElementById("title").textContent = texts[lang].title;
+    document.getElementById("subtitle").textContent = texts[lang].subtitle;
+    document.getElementById("footerNote").textContent = texts[lang].footer;
+    document.getElementById("redirectMsg").textContent = texts[lang].redirect;
+    document.querySelectorAll(".lang-switch button").forEach(b=>{
+      b.classList.toggle("active", b.dataset.lang === lang);
+    });
+  }
+
+  setLang(detectLang());
+
+  const starsContainer = document.getElementById("stars");
+  const starEls = Array.from(starsContainer.querySelectorAll("svg"));
+
+  function paintStars(value){
+    starEls.forEach(s=>{
+      s.classList.toggle("filled", Number(s.dataset.value) <= value);
+    });
+    starsContainer.classList.add("selected");
+  }
+
+  starEls.forEach(star=>{
+    star.addEventListener("mouseenter", ()=> paintStars(Number(star.dataset.value)));
+    star.addEventListener("mouseleave", ()=>{
+      if(!starsContainer.dataset.locked) paintStars(0);
+    });
+    star.addEventListener("click", ()=>{
+      const value = Number(star.dataset.value);
+      starsContainer.dataset.locked = "true";
+      paintStars(value);
+      document.getElementById("redirectMsg").style.display = "block";
+
+      setTimeout(()=>{
+        if(value >= 4){
+          window.location.href = GOOGLE_REVIEW_URL;
+        }else{
+          window.location.href = COMPLAINT_FORM_URL;
+        }
+      }, 600);
+    });
+  });
+</script>
+
+</body>
+</html>
